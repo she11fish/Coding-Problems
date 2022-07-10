@@ -1,9 +1,3 @@
-function is_in_check(num: number, check: Array<number>): Boolean { 
-    if (!check.length) return false  
-    for (let e of check) if (e === num) return true 
-    return false
-}
-
 class Solution {
     solve(nums: Array<number>): Array<number> { 
 
@@ -14,10 +8,9 @@ class Solution {
 
        let i: number = nums.length - 1
        let check: Array<number> = []
-
        while (i > -1)
        {
-           if (occurences[nums[i]] > 1 && !is_in_check(nums[i], check)) 
+           if (occurences[nums[i]] > 1 && !check.includes(nums[i])) 
            {
                 check.push(nums[i])
                 nums.splice(i,1)
