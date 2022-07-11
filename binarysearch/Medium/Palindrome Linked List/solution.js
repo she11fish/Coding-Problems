@@ -15,7 +15,7 @@
         while (current) {
             current.prev = prev
             prev = current
-            if (current.next === null) continue
+            if (current.next === null) break
             current = current.next
         }
         start.prev = null
