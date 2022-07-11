@@ -3,7 +3,7 @@ class Solution {
 
        if (!nums.length) return nums
 
-       let occurences: Object = {}
+       let occurences = {}
        for (let e of nums) !(e in occurences) ? occurences[e] = 1 : occurences[e]++ 
 
        let i: number = nums.length - 1
