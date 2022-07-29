@@ -8,12 +8,14 @@
 #     def __init__(self, val, next=None):
 #         self.val = val
 #         self.next = next
+
 class Solution:
 
     def create_linked_list(self, root, head):
         head.next = LLNode(root.val)
         head = head.next
         return head
+        
     def bfs(self, root, queue, head):
         left = root.left
         right = root.right
