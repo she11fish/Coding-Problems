@@ -19,8 +19,6 @@ class Solution:
             if not course2 in graph:
                 graph[course2] = []
             graph[course2].append(course1)
-        
-        print(graph)
         for node in graph:
             if not dfs(node, node, graph, set()):
                 return False
