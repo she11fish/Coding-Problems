@@ -28,7 +28,6 @@ class Solution:
                 if max_right_path >= 0:
                     total += max_right_path
                 total += currentNode.val
-                print(max_left_path, max_right_path)
                 maximum = max(maximum, total)
                 stack.append(currentNode.left)
                 stack.append(currentNode.right)
