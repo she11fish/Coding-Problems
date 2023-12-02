@@ -6,47 +6,16 @@
 #         self.right = right
 class Solution:
     def maxPathSum(self, root: Optional[TreeNode]) -> int:
-        if not root.left and not root.right:
-            return root.val
-        def dfs(root, total):
+        total = float("-inf")
+        def dfs(root):
+            nonlocal total
             if not root:
-                return total
-            result = max(dfs(root.left, total + root.val), dfs(root.right, total + root.val), total)
-            return result
+                return 0
+            max_left_path = max(dfs(root.left), 0)
+            max_right_path = max(dfs(root.right), 0)
+            current_max_path = max_left_path + max_right_path
+            total = max(current_max_path + root.val, total)
+            return root.val + max(max_left_path, max_right_path)
 
-        stack = []
-        stack.append(root)
-        maximum = float("-inf")
-        while len(stack):
-            currentNode = stack.pop()
-            if currentNode.left and currentNode.right:
-                max_left_path = dfs(currentNode.left, 0)
-                max_right_path = dfs(currentNode.right, 0)
-                total = 0
-                if max_left_path >= 0:
-                    total += max_left_path
-                if max_right_path >= 0:
-                    total += max_right_path
-                total += currentNode.val
-                maximum = max(maximum, total)
-                stack.append(currentNode.left)
-                stack.append(currentNode.right)
-            elif currentNode.left:
-                max_left_path = dfs(currentNode.left, 0)
-                total = 0
-                if max_left_path >= 0:
-                    total += max_left_path
-                total += currentNode.val
-                maximum = max(maximum, total)
-                stack.append(currentNode.left)
-            elif currentNode.right:
-                max_right_path = dfs(currentNode.right, 0)
-                total = 0
-                if max_right_path >= 0:
-                    total += max_right_path
-                total += currentNode.val
-                maximum = max(maximum, total)
-                stack.append(currentNode.right)
-            else:
-                maximum = max(maximum, currentNode.val)
-        return maximum
+        dfs(root)
+        return total
