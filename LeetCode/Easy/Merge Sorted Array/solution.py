@@ -3,17 +3,20 @@ class Solution:
         """
         Do not return anything, modify nums1 in-place instead.
         """
-        temp = []
-        i = 0
-        k = 0
-        while i < m and k < n:
-            if nums1[i] <= nums2[k]:
-                temp.append(nums1[i])
-                i += 1
-            else:
-                temp.append(nums2[k])
-                k += 1
-        temp = temp + nums1[i:m] + nums2[k:]
-        nums1[0:len(nums1)] = temp
-
+        end = n + m - 1
+        i = m - 1
+        k = n - 1
         
+        while end >= 0 and i >= 0 and k >= 0:
+            if nums1[i] >= nums2[k]:
+                nums1[end] = nums1[i]
+                i -= 1
+            else:
+                nums1[end] = nums2[k]
+                k -= 1
+            end -= 1
+            
+        while end >= 0 and k >= 0:
+            nums1[end] = nums2[k]
+            k -= 1
+            end -= 1
