@@ -1,0 +1,27 @@
+class Solution:
+    def generateMatrix(self, n: int) -> List[List[int]]:
+        res = []
+        for _ in range(n):
+            temp = []
+            for i in range(n):
+                temp.append(-1)
+            res.append(temp)
+        num = 1
+        index_start = 0
+        index_end = n - 1
+        while index_start <= index_end:
+            for i in range(index_start, index_end + 1):
+                res[index_start][i] = num
+                num += 1        
+            for k in range(index_start + 1, index_end + 1):
+                res[k][index_end] = num
+                num += 1
+            for j in range(index_end - 1, index_start - 1, -1):
+                res[index_end][j] = num
+                num += 1
+            for l in range(index_end - 1, index_start, -1):
+                res[l][index_start] = num
+                num += 1
+            index_start += 1
+            index_end -= 1
+        return res
